@@ -1,3 +1,5 @@
 [workspace]
-members = ["contracts/cw-bridgebank"]
-
+members = [
+    "contracts/bridgebank", 
+    "contracts/bridgetoken",
+]
