@@ -5,6 +5,8 @@ use serde::{Deserialize, Serialize};
 
 pub use cw20::Cw20ExecuteMsg as ExecuteMsg;
 
+use crate::state::{NetworkId, TokenIdentity};
+
 #[derive(Serialize, Deserialize, JsonSchema, Debug, Clone, PartialEq)]
 pub struct InstantiateMarketingInfo {
     pub project: Option<String>,
@@ -66,6 +68,18 @@ fn is_valid_symbol(symbol: &str) -> bool {
         }
     }
     true
+}
+
+#[derive(Serialize, Deserialize, JsonSchema, Debug, Clone, PartialEq)]
+pub struct PegTokenInfoMsg {
+    pub network_id: NetworkId,
+    pub token_identity: TokenIdentity,
+    pub name: String,
+    pub symbol: String,
+    pub decimals: u8,
+    pub initial_balances: Vec<Cw20Coin>,
+    pub mint: Option<MinterResponse>,
+    pub marketing: Option<InstantiateMarketingInfo>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]

@@ -31,11 +31,36 @@ impl TokenInfo {
 
 #[derive(Serialize, Deserialize, Clone, PartialEq, JsonSchema, Debug)]
 pub enum NetworkId {
+    Unspecified,
     Ethereum,
 }
+
+/// general identity for fungible token, could be contract address in most of blockchains.
+#[derive(Serialize, Deserialize, Clone, PartialEq, JsonSchema, Debug)]
+pub struct TokenIdentity {
+    pub token_id: String,
+}
+
+impl TokenIdentity {
+    fn is_valid_identity(&self) -> bool {
+        let bytes = self.token_id.as_bytes();
+        if bytes.len() < 32 || bytes.len() > 256 {
+            return false;
+        }
+        for byte in bytes.iter() {
+            if (*byte != 45) && (*byte < 65 || *byte > 90) && (*byte < 97 || *byte > 122) {
+                return false;
+            }
+        }
+        true
+    }
+}
+
+
 
 pub const TOKEN_INFO: Item<TokenInfo> = Item::new("token_info");
 pub const MARKETING_INFO: Item<MarketingInfoResponse> = Item::new("marketing_info");
 pub const LOGO: Item<Logo> = Item::new("logo");
 pub const BALANCES: Map<&Addr, Uint128> = Map::new("balance");
 pub const ALLOWANCES: Map<(&Addr, &Addr), AllowanceResponse> = Map::new("allowance");
+pub const PEGGEDTOKENS: Map<(&NetworkId, &TokenIdentity), TokenInfo> = Map::new("pegged_tokens");
