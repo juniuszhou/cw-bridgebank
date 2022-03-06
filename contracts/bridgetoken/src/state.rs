@@ -56,11 +56,10 @@ impl TokenIdentity {
     }
 }
 
-
-
 pub const TOKEN_INFO: Item<TokenInfo> = Item::new("token_info");
 pub const MARKETING_INFO: Item<MarketingInfoResponse> = Item::new("marketing_info");
 pub const LOGO: Item<Logo> = Item::new("logo");
 pub const BALANCES: Map<&Addr, Uint128> = Map::new("balance");
 pub const ALLOWANCES: Map<(&Addr, &Addr), AllowanceResponse> = Map::new("allowance");
-pub const PEGGEDTOKENS: Map<(&NetworkId, &TokenIdentity), TokenInfo> = Map::new("pegged_tokens");
+pub const PEGGEDTOKENS: Map<(&NetworkId, &TokenIdentity), Option<TokenInfo>> =
+    Map::new("pegged_tokens");

@@ -518,4 +518,3 @@ pub fn query_download_logo(deps: Deps) -> StdResult<DownloadLogoResponse> {
         Logo::Url(_) => Err(StdError::not_found("logo")),
     }
 }
-

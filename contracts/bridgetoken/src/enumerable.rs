@@ -49,4 +49,3 @@ pub fn query_all_accounts(
 
     Ok(AllAccountsResponse { accounts })
 }
-

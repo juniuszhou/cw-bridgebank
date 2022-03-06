@@ -238,4 +238,3 @@ pub fn query_allowance(deps: Deps, owner: String, spender: String) -> StdResult<
         .unwrap_or_default();
     Ok(allowance)
 }
-
