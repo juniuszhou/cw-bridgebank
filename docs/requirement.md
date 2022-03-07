@@ -25,3 +25,8 @@ the contract for single token, it will map to any fungible token in other chain 
 
 ### bridgebank address 
 ### counter part
+
+## validators
+### validator for each network
+### voting power for each network
+### threshold for each network
